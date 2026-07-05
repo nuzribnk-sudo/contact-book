@@ -1,0 +1,187 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Login - Contact Book</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+
+/* =======================
+   GLOBAL
+======================= */
+body {
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(135deg, #eef2ff, #dbeafe, #f8fafc);
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* =======================
+   CARD
+======================= */
+.card {
+    width: 380px;
+    background: white;
+    padding: 30px;
+    border-radius: 18px;
+    box-shadow: 0 15px 40px rgba(0,0,0,0.12);
+    text-align: center;
+    transition: 0.3s;
+    margin:20px  auto;
+}
+
+.card:hover {
+    transform: translateY(-3px);
+}
+
+/* ICON */
+.icon {
+    font-size: 32px;
+    color: #4f46e5;
+    margin-bottom: 10px;
+}
+
+/* TITLE */
+.title {
+    font-size: 24px;
+    font-weight: 700;
+    color: #4f46e5;
+    margin-bottom: 5px;
+}
+
+.subtitle {
+    font-size: 13px;
+    color: #6b7280;
+    margin-bottom: 20px;
+}
+
+/* =======================
+   FORM
+======================= */
+form {
+    text-align: left;
+}
+
+label {
+    font-size: 13px;
+    font-weight: 600;
+    color: #374151;
+    display: block;
+    margin-bottom: 5px;
+}
+
+input {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 15px;
+    border-radius: 10px;
+    border: 1px solid #e5e7eb;
+    background: #f9fafb;
+    outline: none;
+    transition: 0.2s;
+}
+
+input:focus {
+    border-color: #4f46e5;
+    background: white;
+    box-shadow: 0 0 0 4px rgba(79,70,229,0.15);
+}
+
+/* =======================
+   BUTTON
+======================= */
+.btn {
+    width: 100%;
+    padding: 12px;
+    border: none;
+    border-radius: 10px;
+    font-weight: 600;
+    cursor: pointer;
+    color: white;
+    background: linear-gradient(135deg, #4f46e5, #2563eb);
+    transition: 0.3s;
+}
+
+.btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 20px rgba(79,70,229,0.25);
+}
+
+/* ERROR */
+.error {
+    background: #fee2e2;
+    color: #991b1b;
+    padding: 10px;
+    border-radius: 10px;
+    font-size: 13px;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+/* FOOTER */
+.footer {
+    margin-top: 15px;
+    font-size: 13px;
+    color: #6b7280;
+}
+
+.footer a {
+    color: #4f46e5;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.footer a:hover {
+    text-decoration: underline;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="card">
+
+    <div class="icon">📒</div>
+
+    <div class="title">Contact Book</div>
+    <div class="subtitle">Welcome back! Login to continue</div>
+
+    {% if error %}
+        <div class="error">
+            {{ error }}
+        </div>
+    {% endif %}
+
+    <form method="POST">
+        {% csrf_token %}
+
+        <label>Username</label>
+        <input type="text" name="username" required>
+
+        <label>Password</label>
+        <input type="password" name="password" required>
+
+        <button type="submit" class="btn">
+            Login
+        </button>
+    </form>
+
+    <div class="footer">
+        Don't have an account?
+        <a href="{% url 'signup' %}">Sign Up</a>
+    </div>
+
+</div>
+
+</body>
+</html>

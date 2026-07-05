@@ -1,0 +1,170 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>View Contact</title>
+
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #eef2ff, #dbeafe, #f8fafc)!importent;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* NAVBAR */
+        .navbar {
+            background: linear-gradient(135deg, #4f46e5, #2563eb);
+            color: white;
+            padding: 16px 30px;
+            font-size: 20px;
+            font-weight: 700;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+        }
+
+        /* CENTER WRAPPER */
+        .wrapper {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 30px;
+        }
+
+        /* CARD */
+        .card {
+            width: 380px;
+            background: white;
+            border-radius: 18px;
+            padding: 25px;
+            text-align: center;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+            transition: 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-3px);
+        }
+
+        /* PROFILE IMAGE */
+        .profile-img {
+            width: 110px;
+            height: 110px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid #e5e7eb;
+            margin-bottom: 15px;
+        }
+
+        /* NAME */
+        h2 {
+            color: #1f2937;
+            margin-bottom: 10px;
+        }
+
+        /* INFO BOX */
+        .info {
+            text-align: left;
+            margin-top: 15px;
+        }
+
+        .info p {
+            background: #f9fafb;
+            padding: 10px 12px;
+            border-radius: 10px;
+            margin-bottom: 10px;
+            font-size: 14px;
+            color: #374151;
+        }
+
+        /* BUTTONS */
+        .btn-group {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 10px 14px;
+            border-radius: 10px;
+            text-decoration: none;
+            font-size: 13px;
+            font-weight: 600;
+            transition: 0.3s;
+            color: white;
+        }
+
+        .btn-primary { background: #4f46e5; }
+        .btn-danger { background: #ef4444; }
+        .btn-dark { background: #374151; }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+        }
+
+        /* BACK BUTTON SMALL FIX */
+        .back-btn {
+            margin-top: 15px;
+            display: inline-block;
+            padding: 9px 12px;
+            font-size: 12px;
+        }
+
+    </style>
+</head>
+
+<body>
+
+<nav class="navbar">
+    📒 Contact Book
+</nav>
+
+<div class="wrapper">
+
+    <div class="card">
+
+        {% if contact.image %}
+            <img src="{{ contact.image.url }}" class="profile-img">
+        {% else %}
+            <img src="{% static 'images/default.png' %}" class="profile-img">
+        {% endif %}
+
+        <h2>{{ contact.name }}</h2>
+
+        <div class="info">
+            <p>📞 {{ contact.phone }}</p>
+            <p>✉ {{ contact.email }}</p>
+            <p>📍 {{ contact.address }}</p>
+        </div>
+
+        <div class="btn-group">
+            <a href="{% url 'edit_contact' contact.id %}" class="btn btn-primary">Edit</a>
+            <a href="{% url 'delete_contact' contact.id %}" class="btn btn-danger">Delete</a>
+        </div>
+
+        <a href="{% url 'home' %}" class="btn btn-dark back-btn">
+            ← Back
+        </a>
+
+    </div>
+
+</div>
+
+</body>
+</html>

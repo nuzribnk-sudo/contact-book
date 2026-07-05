@@ -1,0 +1,282 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Manage Contact</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+
+/* RESET */
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins',sans-serif;
+}
+
+/* BODY */
+body{
+    background:linear-gradient(135deg,#eef2ff,#dbeafe,#f8fafc);
+}
+
+/* NAVBAR */
+.navbar{
+    background:linear-gradient(135deg,#4f46e5,#3730a3);
+    color:white;
+    padding:18px 30px;
+    font-size:20px;
+    font-weight:700;
+    box-shadow:0 10px 25px rgba(0,0,0,0.12);
+}
+
+/* WRAPPER */
+.wrapper{
+    display:flex;
+    justify-content:center;
+    padding:30px 15px;
+}
+
+/* CARD */
+.card{
+    width:100%;
+    max-width:520px;
+    background:#fff;
+    border-radius:18px;
+    overflow:hidden;
+    box-shadow:0 15px 35px rgba(0,0,0,0.12);
+}
+
+/* HEADER */
+.card-header{
+    background:linear-gradient(135deg,#4f46e5,#3730a3);
+    color:white;
+    text-align:center;
+    padding:25px;
+}
+
+.icon{
+    width:60px;
+    height:60px;
+    margin:auto;
+    border-radius:50%;
+    background:rgba(255,255,255,0.15);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:24px;
+    margin-bottom:10px;
+}
+
+.card-header h2{
+    font-size:22px;
+    margin-bottom:5px;
+}
+
+.card-header p{
+    font-size:13px;
+    opacity:0.9;
+}
+
+/* FORM */
+form{
+    padding:20px;
+}
+
+/* GRID */
+.form-grid{
+    display:grid;
+    grid-template-columns:repeat(2, minmax(0, 1fr));
+    gap:14px;
+}
+
+/* FIELD */
+.form-field{
+    display:flex;
+    flex-direction:column;
+    min-width:0;
+}
+
+/* LABEL */
+label{
+    font-size:13px;
+    font-weight:600;
+    color:#3730a3;
+    margin-bottom:6px;
+}
+
+/* INPUT */
+input,
+textarea,
+select{
+    width:100%;
+    padding:10px 12px;
+    border:1px solid #d1d5db;
+    border-radius:10px;
+    font-size:14px;
+    outline:none;
+    transition:0.3s;
+}
+
+/* FOCUS */
+input:focus,
+textarea:focus{
+    border-color:#4f46e5;
+    box-shadow:0 0 0 3px rgba(79,70,229,0.15);
+}
+
+/* FULL WIDTH */
+.full{
+    grid-column:1 / -1;
+}
+
+/* IMAGE */
+.image-box{
+    display:flex;
+    gap:10px;
+    align-items:center;
+    flex-wrap:wrap;
+}
+
+.preview-img{
+    width:70px;
+    height:70px;
+    object-fit:cover;
+    border-radius:12px;
+    border:2px solid #4f46e5;
+}
+
+input[type="file"]{
+    width:100%;
+    padding:10px;
+    border:1px solid #d1d5db;
+    border-radius:10px;
+    background:#fff;
+    font-size:14px;
+}
+
+/* BUTTONS */
+.buttons{
+    display:flex;
+    gap:12px;
+    margin-top:18px;
+}
+
+/* BUTTON */
+.btn{
+    flex:1;
+    padding:12px;
+    border:none;
+    border-radius:10px;
+    font-weight:600;
+    cursor:pointer;
+    text-decoration:none;
+    text-align:center;
+    font-size:14px;
+    transition:0.3s;
+}
+
+/* SAVE */
+.save{
+    background:#22c55e;
+    color:white;
+}
+
+/* BACK */
+.back{
+    background:#374151;
+    color:white;
+}
+
+.btn:hover{
+    transform:translateY(-3px);
+    box-shadow:0 10px 18px rgba(0,0,0,0.15);
+}
+
+/* RESPONSIVE */
+@media(max-width:600px){
+    .form-grid{
+        grid-template-columns:1fr;
+    }
+
+    .buttons{
+        flex-direction:column;
+    }
+}
+
+</style>
+</head>
+
+<body>
+
+<nav class="navbar">
+    📒 Contact Book
+</nav>
+
+<div class="wrapper">
+
+<div class="card">
+
+    <!-- HEADER -->
+    <div class="card-header">
+        <div class="icon">✏️</div>
+        <h2>Edit Contact</h2>
+        <p>Update your contact details</p>
+    </div>
+
+    <!-- FORM -->
+    <form method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+
+    <div class="form-grid">
+
+        <div class="form-field">
+            <label>Name</label>
+            {{ form.name }}
+        </div>
+
+        <div class="form-field">
+            <label>Phone</label>
+            {{ form.phone }}
+        </div>
+
+        <div class="form-field">
+            <label>Email</label>
+            {{ form.email }}
+        </div>
+
+         <div class="form-field">
+    <label>Image</label>
+    <input type="file" name="image">
+</div>
+
+        <div class="form-field full">
+            <label>Address</label>
+            {{ form.address }}
+        </div>
+
+    </div>
+
+    <div class="buttons">
+
+        <a href="{% url 'home' %}" class="btn back">
+            Back
+        </a>
+
+        <button type="submit" class="btn save">
+            Save Changes
+        </button>
+
+    </div>
+
+</form>
+
+</div>
+
+</div>
+
+</body>
+</html>
