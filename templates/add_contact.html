@@ -218,6 +218,11 @@
         <form method="POST" enctype="multipart/form-data">
 
             {% csrf_token %}
+            {% if form.errors %}
+<div style="color:red; margin:15px 0;">
+    {{ form.errors }}
+</div>
+{% endif %}
 
             <div class="form-grid">
 

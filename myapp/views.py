@@ -101,6 +101,9 @@ def add_contact(request):
             contact.save()
             return redirect('home')
 
+        else:
+            print(form.errors)   
+
     else:
         form = ContactForm()
 

@@ -14,8 +14,7 @@ class ContactForm(forms.ModelForm):
             }),
             "phone": forms.TextInput(attrs={
                 "class": "form-control",
-                "placeholder": "Enter phone number",
-                "type": "tel"
+                "placeholder": "Enter phone number"
             }),
             "email": forms.EmailInput(attrs={
                 "class": "form-control",
@@ -34,18 +33,8 @@ class ContactForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
+        # Make image required in the form
         self.fields["image"].required = True
         self.fields["image"].error_messages = {
             "required": "Please upload a contact image."
         }
-
-    def clean_phone(self):
-        phone = self.cleaned_data["phone"]
-
-        if not phone.isdigit():
-            raise forms.ValidationError("Phone number must contain only digits.")
-
-        if len(phone) != 10:
-            raise forms.ValidationError("Phone number must be exactly 10 digits.")
-
-        return phone
