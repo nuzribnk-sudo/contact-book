@@ -141,8 +141,14 @@
 
         {% if contact.image %}
             <img src="{{ contact.image.url }}" class="profile-img">
+            <p style="font-size:12px;color:green;word-break:break-all;">
+                Image Path: {{ contact.image.url }}
+            </p>
         {% else %}
             <img src="{% static 'images/default.png' %}" class="profile-img">
+            <p style="color:red;">
+                No image found!
+            </p>
         {% endif %}
 
         <h2>{{ contact.name }}</h2>
@@ -154,8 +160,13 @@
         </div>
 
         <div class="btn-group">
-            <a href="{% url 'edit_contact' contact.id %}" class="btn btn-primary">Edit</a>
-            <a href="{% url 'delete_contact' contact.id %}" class="btn btn-danger">Delete</a>
+            <a href="{% url 'edit_contact' contact.id %}" class="btn btn-primary">
+                Edit
+            </a>
+
+            <a href="{% url 'delete_contact' contact.id %}" class="btn btn-danger">
+                Delete
+            </a>
         </div>
 
         <a href="{% url 'home' %}" class="btn btn-dark back-btn">
